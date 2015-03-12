@@ -1,0 +1,204 @@
+{% include 'head.html' %}
+{% include 'top.html' %}
+{% include 'left.html' %}
+
+			<noscript>
+				<div class="alert alert-block span10">
+					<h4 class="alert-heading">Warning!</h4>
+					<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+				</div>
+			</noscript>
+			
+			<div id="content" class="span10">
+			<!-- content starts -->
+			
+
+			<div>
+				<ul class="breadcrumb">
+					<li>
+						<a href="#">Home</a> <span class="divider">/</span>
+					</li>
+					<li>
+						<a href="">{{ a_path }}</a>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="row-fluid sortable">		
+				<div class="box span12">
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-user"></i> {{ a_path }}</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+
+					<div class="box-content">
+						{% if error %}
+						<legend><div class="alert {{ alert }}">{{error}}</div></legend>
+						{% endif %}
+
+						{% if step == 1 %}
+						<table class="table table-bordered table-striped table-condensed">
+						<thead>
+							<tr>
+								<th>{{ switch_form.name.label }}</th>
+								<th>{{ switch_form.switch_ip.label }}</th>
+								<th>{{ switch_form.post.label }}</th>
+								<th>{{ switch_form.sw_type.label }}</th>
+								<th>状态</th>
+								<th>d</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for item in form %}
+							<form class="form-horizontal" action="" method="post">
+							<tr>
+								<td><input name="name" type="hidden" id="name" value="{{ item.name }}" />{{ item.name }}</td>
+								<td><input name="ip" type="hidden" id="ip" value="{{ item.switch_ip }}" />{{ item.switch_ip }}</td>
+								<td><input name="post" type="hidden" id="post" value="{{ item.post }}" />{{ item.post }}</td>
+								<td>{{ item.sw_type }}</td>
+								<td><span class="label label-important label-success">在线</span></td>
+								<td class="center">
+								<input name="step" type="hidden" id="step" value="2" />
+								<button type="submit" class="btn btn-primary"><i class="icon-wrench icon-white"></i> 绑定</button>
+								<a class="btn btn-info" href="/switch/edit/{{ item.id }}"><i class="icon-edit icon-white"></i> 查看</a>
+								</td>
+							</tr>
+							</form>
+							{% endfor %}
+						</tbody>
+						</table>
+						{% endif %}
+
+
+
+						{% if step == 2 %}
+						<table class="table table-bordered table-striped table-condensed">
+						<thead>
+							<tr>
+								<th>端口号</th>
+								<th>VLAN</th>
+								<th>MAC</th>
+								<th>状态</th>
+								<th>绑定</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for i in switch_2 %}
+							<form class="form-horizontal" action="" method="post">
+							<tr>
+								<td><input name="int_post" type="hidden" id="int_post" value="{{ i.0 }}" />{{ i.0 }}</td>
+								<td><input name="int_vlan" type="hidden" id="int_vlan" value="{{ i.2 }}" />{{ i.2 }}</td>
+								<td>{{ i.3.0 }}</td>
+								<td><input name="int_status" type="hidden" id="int_status" value="{{ i.1 }}" />
+								{% if i.1 == 'connected' %}
+								<span class="label label-important label-success">connected</span>
+								{% else %}
+								<span class="label label-important">notconnect</span>
+								{% endif %}
+								</td>
+								<td class="center">
+								<input name="step" type="hidden" id="step" value="3" />
+								<button type="submit" class="btn btn-primary"><i class="icon-wrench icon-white"></i> 绑定</button>
+								</td>
+							</tr>
+							</form>
+							{% endfor %}
+
+						</tbody>
+						</table>
+						{% endif %}
+
+						{% if step == 3 %}
+							<form class="form-horizontal" action="" method="post">
+							<table class="table table-bordered table-striped">
+								<tr>
+									<td width="20%"><h2 class="alert-heading">类型</h2></td>
+									<td width="20%"><h2 class="alert-heading">当前值</h2></td>
+									<td width="40%"><h2 class="alert-heading">修改值</h2></td>
+								</tr>
+								<tr>
+									<td width="20%"><h3>交换机</h3></td>
+									<td width="20%">{{switch_3.0}}</td>
+									<td width="40%">
+									<input id="switch_db_name" name="switch_db_name" type="text" value="{{switch_3.0}}" readonly="readonly"/>
+									</td>
+								</tr>
+								<tr>
+									<td width="20%"><h3>交换机端口</h3></td>
+									<td width="20%">Fa0/{{switch_3.2}}</td>
+									<td width="40%">
+									<input id="switch_bd_post" name="switch_bd_post" type="text" value="{{switch_3.2}}" readonly="readonly"/>
+									</td>
+								</tr>
+								<tr>
+									<td width="20%"><h3>更换Vlan</h3></td>
+									<td width="20%">{{switch_3.3}}</td>
+									<td width="40%">
+									<input id="switch_bd_vlan" name="switch_bd_vlan" type="text" value="" /><span class="red">留空则不更改VLAN</span>
+									</td>
+								</tr>
+								<tr>
+									<td width="20%"><h3>绑定MAC地址</h3></td>
+									<td width="20%">{{switch_3.4}}</td>
+									<td width="40%">
+									<input id="switch_bd_mac" name="switch_bd_mac" type="text" value="" /><span class="red">留空则不修改MAC地址绑定</span>
+									</td>
+								</tr>
+								<tr>
+									<td width="20%"><h3>绑定IP地址</h3></td>
+									<td width="20%"></td>
+									<td width="40%">
+									<input id="switch_bd_ip" name="switch_bd_ip" type="text" value="" /><span class="red">留空则不修改ARP绑定</span>
+									</td>
+								</tr>
+								<tr>
+									<td width="20%"><h3>最近异常MAC</h3></td>
+									<td width="20%">{{switch_3.5}}</td>
+									<td width="40%"><input name="step" type="hidden" id="step" value="4" />
+									</td>
+								</tr>
+							</table>
+
+							<div class="form-actions">
+								<button type="submit" class="btn btn-primary">绑定</button>
+							</div>
+							</form>
+						{% endif %}
+
+						{% if step == 4 %}
+						<div class="alert {{ alert }}">
+						{% for i in switch_4 %}
+						{{ i }}<br>
+						{% endfor %}
+						</div>
+						{% endif %}
+					</div>
+				</div><!--/span-->
+			</div><!--/row-->
+    
+			<!-- content ends -->
+			</div><!--/#content.span10-->
+			</div><!--/fluid-row-->
+				
+		<hr>
+		{% for item in form %}
+		<div class="modal hide fade" id="myModal{{ item.id }}">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<h3>提示</h3>
+			</div>
+			<div class="modal-body">
+				<p>您确定要删除 {{ item.username }} 账户吗？？？</p>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn" data-dismiss="modal">取消</a>
+				<a href="/user/delete/{{ item.id }}" class="btn btn-primary">删除</a>
+			</div>
+		</div>
+		{% endfor %}
+
+{% include 'footer.html' %}

@@ -1,0 +1,137 @@
+{% include 'head.html' %}
+{% include 'top.html' %}
+{% include 'left.html' %}
+
+			<noscript>
+				<div class="alert alert-block span10">
+					<h4 class="alert-heading">Warning!</h4>
+					<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+				</div>
+			</noscript>
+			
+			<div id="content" class="span10">
+			<!-- content starts -->
+			
+
+			<div>
+				<ul class="breadcrumb">
+					<li>
+						<a href="#">Home</a> <span class="divider">/</span>
+					</li>
+					<li>
+						<a href="">{{ a_path }}</a>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-edit"></i> {{ a_path }}</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+						<fieldset>
+						{% if error %}
+						<legend><div class="alert {{ alert }}">{{error}}</div></legend>
+						{% endif %}
+							<legend>Datepicker, Autocomplete, WYSIWYG</legend>
+							<!--<legend>Datepicker, Autocomplete, WYSIWYG</legend>-->
+							{% for item in form %}
+							<table class="table table-bordered table-striped">
+								<tr>
+									<td width="30%"><h3>{{ user_form.username.label }}</h3></td>
+									<td width="70%">
+									{{ item.username }}
+									</td>
+								</tr>
+								<tr>
+									<td width="30%"><h3>{{ user_form.password.label }}</h3></td>
+									<td width="70%">
+									{{ user_form.password }} <span class="red">留空则不修改密码</span>
+									</td>
+								</tr>
+								<tr>
+									<td width="30%"><h3>{{ user_form.level.label }}</h3></td>
+									<td width="70%">
+										<select id="selectError3" name="level">
+										{% if item.level == '管理员' %}
+										<option>管理员</option>
+										<option>用户</option>
+										{% elif item.level == '用户' %}
+										<option>用户</option>
+										<option>管理员</option>
+										{% endif %}
+									</select>
+									</td>
+								</tr>
+								<tr>
+									<td width="30%"><h3>{{ user_form.email.label }}</h3></td>
+									<td width="70%">
+									<input id="id_email" name="email" type="text" value="{{ item.email }}" />
+									</td>
+								</tr>
+								<tr>
+									<td width="30%"><h3>{{ user_form.allow_ip.label }}</h3></td>
+									<td width="70%">
+									<input id="id_allow_ip" name="allow_ip" type="text" value="{{ item.allow_ip }}" />
+									</td>
+								</tr>
+								<tr>
+									<td width="30%"><h3>{{ user_form.photo.label }}</h3></td>
+									<td width="70%">
+									{{ user_form.photo }}
+									</td>
+								</tr>
+								<tr>
+									<td width="30%"><h3>{{ user_form.u_status.label }}</h3></td>
+									<td width="70%">
+									<select id="selectError3" name="u_status">
+										{% if item.status == 'label-success' %}
+										<option>开启</option>
+										<option>关闭</option>
+										{% else %}
+										<option>关闭</option>
+										<option>开启</option>
+										{% endif %}
+									</select>
+									</td>
+								</tr>
+							</table>
+							{% endfor %}
+							<div class="form-actions">
+								<button type="submit" class="btn btn-primary">Save changes</button>
+								<button type="reset" class="btn">Cancel</button>
+							</div>
+						</fieldset>
+						</form>   
+
+					</div>
+				</div><!--/span-->
+    
+			<!-- content ends -->
+			</div><!--/#content.span10-->
+			</div><!--/fluid-row-->
+				
+		<hr>
+
+		<div class="modal hide fade" id="myModal">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<h3>Settingsss试试</h3>
+			</div>
+			<div class="modal-body">
+				<p>Here settings can be configured...</p>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn" data-dismiss="modal">取消</a>
+				<a href="#" class="btn btn-primary">保存</a>
+			</div>
+		</div>
+
+{% include 'footer.html' %}

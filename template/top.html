@@ -1,0 +1,48 @@
+<body>
+	<!-- topbar starts -->
+	<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<a class="brand" href="index.html"> <img alt="Charisma Logo" src="/img/logo20.png" /> <span>Starl</span></a>
+				
+				<!-- theme selector starts -->
+				<!-- theme selector ends -->
+
+				<!-- user dropdown starts -->
+				<div class="btn-group pull-right" >
+					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="icon-user"></i><span class="hidden-phone"> {{ i_user }}</span>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="/user/view/{{ i_user }}">{{ i_user }}</a></li>
+						<li class="divider"></li>
+						<li><a href="/logout/">Logout</a></li>
+					</ul>
+				</div>
+				<!-- user dropdown ends -->
+
+				<!-- site setings starts -->
+				<div class="btn-group pull-right" >
+					<a class="btn dropdown-toggle" data-toggle="dropdown" href="/site/">
+						<i class="icon-cog"></i><span class="hidden-phone"> 站点设置</span>
+					</a>
+				</div>
+				<!-- site setings ends -->
+
+				<div class="top-nav nav-collapse">
+					<ul class="nav">
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+	<!-- topbar ends -->
+
+		<div class="container-fluid">
+		<div class="row-fluid">

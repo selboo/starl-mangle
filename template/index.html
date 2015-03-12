@@ -1,0 +1,263 @@
+{% include 'head.html' %}
+{% include 'top.html' %}
+{% include 'left.html' %}
+
+<script type="text/javascript">
+			$(function(){
+				var output = [{% for i in swit_data %}'{{i.traffic_output}}',{% endfor %}];
+				var input = [{% for i in swit_data %}'{{i.traffic_input}}',{% endfor %}];;
+				var data = [
+				         	{
+				         		name : '下载',
+				         		value:input,
+				         		color:'#aad0db',
+				         		line_width:2
+				         	},
+				         	{
+				         		name : '上传',
+				         		value:output,
+				         		color:'#f68f70',
+				         		line_width:2
+				         	}
+				         ];
+				//创建x轴标签文本   
+				var date = new Date()
+				date.setDate(date.getDate()-6);
+				var labels = [{% for i in swit_data %}'{{i.datatime|date:"H:i:s"}}',{% endfor %}];
+				var chart = new iChart.Area2D({
+					animation : true,
+					render : 'canvasDiv-bytes',
+					data: data,
+					align:'center',
+					subtitle : '',
+					width : 300,
+					height : 300,
+					background_color:'#FEFEFE',
+					tip:{
+						enable:true,
+						shadow:true,
+						move_duration:100,
+						border:{
+							 enable:false,
+							 radius : 5,
+							 width:2,
+							 color:'#3f8695'
+						},
+						listeners:{
+							parseText:function(tip,name,value,text,i){
+								return name+": "+value+" bytes/sec";
+							}
+						}
+					},
+					tipMocker:function(tips,i){
+						return "<div style='font-weight:600'>"+
+								labels[i]+" "+//日期
+								"</div>"+tips.join("<br/>");
+					},
+					crosshair:{
+						enable:true,
+						line_color:'#3f8695',
+						line_width:2
+					},
+					sub_option : {
+						label:false,
+						point_size:10
+					},
+					coordinate:{
+						width:300,
+						height:300,
+						axis:{
+							color:'#dcdcdc',
+							width:1
+						},
+						scale:[{
+							 position:'left',	
+							 start_scale:0,
+							 end_scale:0,
+							 scale_space:0,
+							 scale_size:2,
+							 scale_color:'#9f9f9f'
+						},{
+							 position:'bottom',	
+							 labels:labels
+						}]
+					}
+				});
+			
+			//开始画图
+			chart.draw();
+		});
+</script>
+
+			<noscript>
+				<div class="alert alert-block span10">
+					<h4 class="alert-heading">Warning!</h4>
+					<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+				</div>
+			</noscript>
+			
+			<div id="content" class="span10">
+			<!-- content starts -->
+			
+
+			<div>
+				<ul class="breadcrumb">
+					<li>
+						<a href="#">Home</a> <span class="divider">/</span>
+					</li>
+					<li>
+						<a href="#">Dashboard</a>
+					</li>
+				</ul>
+			</div>
+			<div class="sortable row-fluid">
+				<a data-rel="tooltip" title="{{ User_Num_New }} 新添加" class="well span3 top-block" href="/user/">
+					<span class="icon32 icon-red icon-user"></span>
+					<div>管理员数量</div>
+					<div>{{ User_Num }}</div>
+					<span class="notification">{{ User_Num_New }}</span>
+				</a>
+
+				<a data-rel="tooltip" title="{{ Swit_Num_New }} 新添加" class="well span3 top-block" href="/switch/">
+					<span class="icon32 icon-color icon-star-on"></span>
+					<div>交换机数量</div>
+					<div>{{ Swit_Num }}</div>
+					<span class="notification green">{{ Swit_Num_New }}</span>
+				</a>
+
+				<a data-rel="tooltip" title="{{ Serv_Num_New }} 新添加" class="well span3 top-block" href="#">
+					<span class="icon32 icon-color icon-cart"></span>
+					<div>服务器数量</div>
+					<div>{{ Serv_Num }}</div>
+					<span class="notification yellow">{{ Serv_Num_New }}</span>
+				</a>
+				
+				<a data-rel="tooltip" title="{{ Warn_Num_New }} 新报警" class="well span3 top-block" href="#">
+					<span class="icon32 icon-color icon-envelope-closed"></span>
+					<div>监控数量</div>
+					<div>{{ Warn_Num }}</div>
+					<span class="notification red">{{ Warn_Num_New }}</span>
+				</a>
+			</div>
+			
+			
+					
+			<div class="row-fluid sortable">
+				<div class="box span4">
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-list-alt"></i> 出口带宽图</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						<div id='canvasDiv-bytes'></div>
+					</div>
+				</div><!--/span-->
+
+				<div class="box span4">
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-user"></i> 用户管理</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						<div class="box-content">
+							<ul class="dashboard-list">
+								{% for i in user_data %}
+								<li>
+									<a href="/user/view/{{ i.id }}">
+										<img class="dashboard-avatar" alt="{{ i.username }}" src="
+										{% if i.photo == 'NO' %}
+										/img/logo.jpeg
+										{% else %}
+										{{ i.photo }}
+										{% endif %}
+										"></a>
+										<strong>Name:</strong> <a href="/user/view/{{ i.id }}">{{ i.username }}
+									</a><br>
+									<strong>Last:</strong> {{ i.lasttime|date:"Y-m-d H:i:s" }}<br>
+									<strong>Status:</strong>
+									{% if i.status == 'label-success' %}
+									<span class="label label-success"> 正常
+									{% else %}
+									<span class="label label-important"> 禁用
+									{% endif %}
+									</span>
+								</li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div><!--/span-->
+
+				<div class="box span4" style="background:FF0000">
+					<div class="box-header well">
+						<h2><i class="icon-th"></i> 监控报警</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+					占位
+					</div>
+				</div><!--/span-->
+			</div><!--/row-->
+
+			<div class="row-fluid">
+				<div class="box span12">
+					<div class="box-header well">
+						<h2><i class="icon-info-sign"></i> 星空传说管理平台说明</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						<h1>1、Tengine 1.4.6 </h1>
+						<br>
+						<b>Tengine是由淘宝网发起的Web服务器项目。它在Nginx的基础上，针对大访问量网站的需求，添加了很多高级功能和特性。Tengine的性能和稳定性已经在大型的网站如淘宝网，天猫商城等得到了很好的检验。它的最终目标是打造一个高效、稳定、安全、易用的Web平台。</b>
+						<br><br>
+						<h1>2、Bootstrap charisma </h1>
+						<br>
+						<b>Bootstrap是快速开发Web应用程序的前端工具包。它是一个CSS和HTML的集合，它使用了最新的浏览器技术，给你的Web开发提供了时尚的版式，表单，buttons，表格，网格系统等等。</b>
+						<br><br>
+						<h1>3、Django 1.5.1 </h1>
+						<br>
+						<b>Django 项目是一个定制框架，它源自一个在线新闻 Web 站点，于 2005 年以开源的形式被释放出来。</b>
+						<br><br>
+						<h1>4、ichartjs 1.2 </h1>
+						<br>
+						<b>ichartjs 是一款基于HTML5的图形库。使用纯javascript语言, 利用HTML5的canvas标签绘制各式图形。 ichartjs致力于为您的应用提供简单、直观、可交互的体验级图表组件。是WEB/APP图表展示方面的解决方案 。如果你正在开发HTML5的应用，ichartjs正好适合您。 ichartjs目前支持饼图、环形图、折线图、面积图、柱形图、条形图。ichartjs是基于Apache License 2.0协议的开源项目。</b>
+
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+
+			<!-- content ends -->
+			</div><!--/#content.span10-->
+				</div><!--/fluid-row-->
+				
+		<hr>
+
+		<div class="modal hide fade" id="myModal">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<h3>Settings</h3>
+			</div>
+			<div class="modal-body">
+				<p>Here settings can be configured...</p>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn" data-dismiss="modal">Close</a>
+				<a href="#" class="btn btn-primary">Save changes</a>
+			</div>
+		</div>
+{% include 'footer.html' %}

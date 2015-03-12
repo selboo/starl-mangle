@@ -1,0 +1,302 @@
+{% include 'head.html' %}
+{% include 'top.html' %}
+{% include 'left.html' %}
+
+			<noscript>
+				<div class="alert alert-block span10">
+					<h4 class="alert-heading">Warning!</h4>
+					<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+				</div>
+			</noscript>
+			
+			<div id="content" class="span10">
+			<!-- content starts -->
+			
+
+			<div>
+				<ul class="breadcrumb">
+					<li>
+						<a href="#">Home</a> <span class="divider">/</span>
+					</li>
+					<li>
+						<a href="">{{ a_path }}</a>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-edit"></i> {{ a_path }}</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						<form class="form-horizontal" action="" method="post">
+						<fieldset>
+						{% if error %}
+						<legend><div class="alert {{ alert }}">{{error}}</div></legend>
+						{% endif %}
+							<legend>Datepicker, Autocomplete, WYSIWYG</legend>
+							<!--<legend>Datepicker, Autocomplete, WYSIWYG</legend>-->
+							<div class="row-fluid">
+								<div class="span5">
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.Room.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="Room" name="Room" type="text" />
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.System.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="System" name="System" type="text" />
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.Type.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="Type" name="Type" type="text" />
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.Use.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="Use" name="Use" type="text" />
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.Brand.label }}</label>
+							<div class="controls">
+								<select name="Brand" id="selectError1" data-rel="chosen">
+									<option>HP</option>
+									<option>Dell</option>
+									<option>IBM</option>
+								</select>
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.Weights.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="Weights" name="Weights" type="text" />
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.SN.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="SN" name="SN" type="text" />
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.Equipment_Model.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="Equipment_Model" name="Equipment_Model" type="text" />
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.Response.label }}</label>
+							<div class="controls">
+								<select name="Response" id="selectError" data-rel="chosen">
+									<option>Next Day</option>
+									<option>4 Hour 13x5</option>
+									<option>4 Hour 24x7</option>
+								</select>
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.expiration.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused datepicker" id="expiration" name="expiration" type="text" value="2012-01-01" />
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.Private_IP.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="Private_IP" name="Private_IP" type="text" />
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.Public_IP.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="Public_IP" name="Public_IP" type="text" />
+							</div>
+							</div>
+							
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.Admin_IP.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="Admin_IP" name="Admin_IP" type="text" />
+							</div>
+							</div>
+
+								</div>
+								<div class="span6">
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.CPU.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="CPU" name="CPU" type="text" />
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.CPU_NUM.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="CPU_NUM" name="CPU_NUM" type="text" />
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.MEM.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="MEM" name="MEM" type="text" />
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.MEM_NUM.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="MEM_NUM" name="MEM_NUM" type="text" />
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.MEM_SINGLE.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="MEM_SINGLE" name="MEM_SINGLE" type="text" />
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.HDD.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="HDD" name="HDD" type="text" />
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.HDD_NUM.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="HDD_NUM" name="HDD_NUM" type="text" />
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.HDD_SINGLE.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="HDD_SINGLE" name="HDD_SINGLE" type="text" />
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.RAID_Type.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="RAID_Type" name="RAID_Type" type="text" />
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.MAC_1.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="MAC_1" name="MAC_1" type="text" />
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.MAC_2.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="MAC_2" name="MAC_2" type="text" />
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.MAC_3.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="MAC_3" name="MAC_3" type="text" />
+							</div>
+							</div>
+
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ form.MAC_4.label }}</label>
+							<div class="controls">
+							<input class="input-xlarge focused" id="MAC_4" name="MAC_4" type="text" />
+							</div>
+							</div>
+
+								</div>
+							</div>
+
+							<!--
+							<legend>Datepicker, Autocomplete, WYSIWYG</legend>
+							{% for item in form %}
+							<div class="control-group">
+							<label class="control-label" for="typeahead">{{ item.label }}</label>
+							<div class="controls">
+							{{ item }}
+							</div>
+							</div>
+							{% endfor%}
+
+							<div class="control-group">
+							<label class="control-label" for="date01">Date input</label>
+							<div class="controls">
+							<input type="text" class="input-xlarge datepicker" id="date01" value="02/16/12">
+							</div>
+							</div>
+							<div class="control-group">
+							  <label class="control-label" for="fileInput">File input</label>
+							  <div class="controls">
+								<input class="input-file uniform_on" id="fileInput" type="file">
+							  </div>
+							</div>          
+							<div class="control-group">
+							  <label class="control-label" for="textarea2">Textarea WYSIWYG</label>
+							  <div class="controls">
+								<textarea class="cleditor" id="textarea2" rows="3"></textarea>
+							  </div>
+							</div>
+							-->
+							<div class="form-actions">
+								<button type="submit" class="btn btn-primary">Save changes</button>
+								<button type="reset" class="btn">Cancel</button>
+							</div>
+						</fieldset>
+						</form>   
+
+					</div>
+				</div><!--/span-->
+    
+			<!-- content ends -->
+			</div><!--/#content.span10-->
+			</div><!--/fluid-row-->
+				
+		<hr>
+
+		<div class="modal hide fade" id="myModal">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<h3>Settingsss试试</h3>
+			</div>
+			<div class="modal-body">
+				<p>Here settings can be configured...</p>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn" data-dismiss="modal">取消</a>
+				<a href="#" class="btn btn-primary">保存</a>
+			</div>
+		</div>
+
+{% include 'footer.html' %}

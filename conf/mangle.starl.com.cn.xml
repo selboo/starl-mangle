@@ -1,0 +1,16 @@
+<uwsgi>
+  <socket>127.0.0.1:10000</socket>
+  <listen>200</listen>
+  <master>true</master>
+  <pidfile>/tmp/uwsgi10000.pid</pidfile>
+  <workers>1</workers>
+  <processes>2</processes>
+  <pythonpath>/root/starl</pythonpath>
+  <module>django_wsgi</module>
+  <profiler>true</profiler>
+  <memory-report>true</memory-report>
+  <enable-threads>true</enable-threads>
+  <logdate>true</logdate>
+  <limit-as>6048</limit-as>
+  <daemonize>/root/starl/log.txt</daemonize>
+</uwsgi>

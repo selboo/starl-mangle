@@ -1,0 +1,154 @@
+{% include 'head.html' %}
+{% include 'top.html' %}
+{% include 'left.html' %}
+			
+			<noscript>
+				<div class="alert alert-block span10">
+					<h4 class="alert-heading">Warning!</h4>
+					<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+				</div>
+			</noscript>
+			
+			<div id="content" class="span10">
+			<!-- content starts -->
+			
+		
+			<div>
+				<ul class="breadcrumb">
+					<li>
+						<a href="#">Home</a> <span class="divider">/</span>
+					</li>
+					<li>
+						<a href="#">{{ a_path }}</a>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="row-fluid sortable">	
+				<div class="box span12">
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-plus"></i> Extended Elements</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						{% if error %}
+						<legend><div class="alert {{ alert }}">{{error}}</div></legend>
+						{% endif %}
+						<form class="form-horizontal" action="" method="post">
+						<table class="table table-bordered table-striped">
+							{% for item in formdb %}
+							<tr>
+								<td><h3>{{ form.title.label }}</h3></td>
+								<td>
+									<input id="id_title" name="title" type="text" value="{{ item.title }}" />
+								</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td><h3>{{ form.reg_status.label }}</h3></td>
+								<td>
+									<input data-no-uniform="true" type="checkbox" class="iphone-toggle" name="reg_status" value="on" {% if item.reg_status == 'on' %} checked {% endif %} />
+								</td>
+								<td><code>是否允许网页注册</code></td>
+							</tr>
+							<tr>
+								<td><h3>{{ form.ssh_keygen.label }}</h3></td>
+								<td>
+									<textarea rows="5" id="id_ssh_keygen" name="ssh_keygen">{{ item.ssh_keygen }}</textarea>
+								</td>
+								<td><code>请输入 ssh-keygen 生成的 id_rsa.pub<br>用于无密码链接服务器和交换机等支持SSH设备</code></td>
+							</tr>
+							<tr>
+								<td><h3>{{ form.angent_port.label }}</h3></td>
+								<td>
+									<input id="id_angent_port" name="angent_port" type="text" value="{{ item.angent_port }}" />
+								</td>
+								<td><code></code></td>
+							</tr>
+							<tr>
+								<td><h3>{{ form.angent_user.label }}</h3></td>
+								<td>
+									<input id="id_angent_user" name="angent_user" type="text" value="{{ item.angent_user }}" />
+								</td>
+								<td><code></code></td>
+							</tr>
+							<tr>
+								<td><h3>{{ form.angent_pass.label }}</h3></td>
+								<td>
+									<input id="id_angent_pass" name="angent_pass" type="text" value="{{ item.angent_pass }}" />
+								</td>
+								<td><code></code></td>
+							</tr>
+							<tr>
+								<td><h3>{{ form.mail_snmp.label }}</h3></td>
+								<td>
+									<input id="id_mail_snmp" name="mail_snmp" type="text" value="{{ item.mail_snmp }}" />
+								</td>
+								<td><code></code></td>
+							</tr>
+							<tr>
+								<td><h3>{{ form.mail_port.label }}</h3></td>
+								<td>
+									<input id="id_mail_port" name="mail_port" type="text" value="{{ item.mail_port }}" />
+								</td>
+								<td><code></code></td>
+							</tr>
+							<tr>
+								<td><h3>{{ form.mail_user.label }}</h3></td>
+								<td>
+									<input id="id_mail_user" name="mail_user" type="text" value="{{ item.mail_user }}" />
+								</td>
+								<td><code></code></td>
+							</tr>
+							<tr>
+								<td><h3>{{ form.mail_pass.label }}</h3></td>
+								<td>
+									<input id="id_mail_pass" name="mail_pass" type="text" value="{{ item.mail_pass }}" />
+								</td>
+								<td><code></code></td>
+							</tr>
+							<tr>
+								<td><h3>{{ form.mail_from.label }}</h3></td>
+								<td>
+									<input id="id_mail_from" name="mail_from" type="text" value="{{ item.mail_from }}" />
+								</td>
+								<td><code></code></td>
+							</tr>
+							{% endfor %}
+						</table>
+						<div class="form-actions">
+							<button type="submit" class="btn btn-primary">Save changes</button>
+							<button type="reset" class="btn">Cancel</button>
+						</div>
+						</form>
+					</div>	
+				</div><!--/span-->
+				
+			</div><!--/row-->
+
+		
+			<!-- content ends -->
+			</div><!--/#content.span10-->
+			</div><!--/fluid-row-->
+				
+		<hr>
+
+		<div class="modal hide fade" id="myModal">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<h3>Settings</h3>
+			</div>
+			<div class="modal-body">
+				<p>Here settings can be configured...</p>
+			</div>
+			<div class="modal-footer">
+				<a href="#" class="btn" data-dismiss="modal">Close</a>
+				<a href="#" class="btn btn-primary">Save changes</a>
+			</div>
+		</div>
+
+{% include 'footer.html' %}

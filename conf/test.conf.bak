@@ -1,0 +1,23 @@
+server
+{
+  listen 8000;
+  server_name test.starl.com.cn;
+  index index.html index.py;
+  root html;
+ 
+  rewrite ^/html/\d[1,2]/\d[1,2]\d[1,2]/\.html  /html/$1-$2-$3 last;
+  rewrite ^/html/([0-9][0-9])-([0-9][0-9])-([0-9][0-9])/(.*)?$ /html/$1$2$3/$4 last;
+
+rewrite ^/post/([0-9]+)/?([0-9]+)?/?([0-9]+)?/?$ /read.php?entryid=$1&page=$2&part=$3 last;
+rewrite ^/page/([0-9]+)/([0-9]+)/?$ /index.php?mode=$1&page=$2 last;
+rewrite ^/starred/([0-9]+)/?([0-9]+)?/?$ /star.php?mode=$1&page=$2 last;
+rewrite ^/category/([^/]+)/?([0-9]+)?/?([0-9]+)?/?$ /index.php?go=category_$1&mode=$2&page=$3 last;
+rewrite ^/archiver/([0-9]+)/([0-9]+)/?([0-9]+)?/?([0-9]+)?/?$ /index.php?go=archive&cm=$1&cy=$2&mode=$3&page=$4 last;
+rewrite ^/date/([0-9]+)/([0-9]+)/([0-9]+)/?([0-9]+)?/?([0-9]+)?/?$ /index.php?go=showday_$1-$2-$3&mode=$4&page=$5 last;
+rewrite ^/user/([0-9]+)/?$ /view.php?go=user_$1 last;
+rewrite ^/tags/([^/]+)/?([0-9]+)?/?([0-9]+)?/?$ /tag.php?tag=$1&mode=$2&page=$3 last;
+rewrite ^/component/id/([0-9]+)/?$ /page.php?pageid=$1 last;
+rewrite ^/component/([^/]+)/?$ /page.php?pagealias=$1 last;
+}
+
+

@@ -1,0 +1,51 @@
+{% load i18n %}
+        <div class="col-md-3">
+            <div class="bs-sidebar hidden-print affix" role="complementary">
+                <ul class="nav bs-sidenav">
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-wrench"></span> <strong>{% trans "Server Settings" %}</strong></a>
+                        <ul class="nav">
+                            <li>
+                                <a href="{% url 'overview' host_id %}"><span class="glyphicon glyphicon-info-sign"></span> {% trans "Overview" %}</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'create' host_id %}"><span class="glyphicon glyphicon-plus"></span> {% trans "Create VM" %}</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'storage' host_id %}"><span class="glyphicon glyphicon-hdd"></span> {% trans "Storage pool" %}</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'network' host_id %}"><span class="glyphicon glyphicon-globe"></span> {% trans "Network pool" %}</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'snapshot' host_id %}"><span class="glyphicon glyphicon-camera"></span> {% trans "Snapshots" %}</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-list"></span> <strong>{% trans "Virtual Machines" %}</strong></a>
+                        <ul class="nav">
+                            {% if not all_vm %}
+                                <li>
+                                    <a href="{% url 'create' host_id %}"><span class="glyphicon glyphicon-plus"></span> {% trans "Create VM" %}</a>
+                                </li>
+                            {% else %}
+                                {% if not snapshot_page %}
+                                    {% for vm in all_vm %}
+                                        <li {% ifequal vm vname %}class="active"{% endifequal %}>
+                                            <a href="{% url 'instance' host_id vm %}"><span class="glyphicon glyphicon-tasks"></span> {{ vm }}</a>
+                                        </li>
+                                    {% endfor %}
+                                {% else %}
+                                    {% for vm in all_vm %}
+                                        <li {% ifequal vm vname %}class="active"{% endifequal %}>
+                                            <a href="{% url 'dom_snapshot' host_id vm %}"><span class="glyphicon glyphicon-camera"></span> {{ vm }}</a>
+                                        </li>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
